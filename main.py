@@ -1,3 +1,4 @@
+from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 
@@ -70,7 +71,7 @@ class App:
         self.update_description()
         self.apply_theme()
         self.redraw_current_view()
-
+    
     def build_ui(self):
         container = ttk.Frame(self.root, padding=10)
         container.pack(fill="both", expand=True)
@@ -82,6 +83,14 @@ class App:
 
         plot_panel = ttk.Frame(container)
         plot_panel.pack(side="right", fill="both", expand=True)
+
+        # ===== LOGO =====
+        image = Image.open("logo.jpg")
+        image = image.resize((200, 80))  # zmienisz rozmiar jak chcesz
+        self.logo_img = ImageTk.PhotoImage(image)
+
+        logo_label = ttk.Label(control_panel, image=self.logo_img)
+        logo_label.pack(pady=(0, 10))
 
         title = ttk.Label(
             control_panel,
